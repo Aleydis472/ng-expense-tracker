@@ -12,7 +12,7 @@
     padding: 60px;
     background-color: #0d6efd0f;
     min-height: 55vh;
-    max-width: 70vh;
+    max-width: 80vh;
   }
 
   .btn-login {
@@ -34,4 +34,25 @@
   border-radius: 2.5rem;
 }
 
+@media (max-width: 576px) {
+  .card-main {
+    margin-top: 14rem;
+    max-width: 100%;
 
+    .card-login {
+      margin-top: -3rem;
+      background-color: transparent;
+    }
+
+    .btn-login {
+      color: white;
+      background-color: #0d6efd;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+    }
+
+    button .fa-google {
+      color: white !important;
+    }
+  }
+}
