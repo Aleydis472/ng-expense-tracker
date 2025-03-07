@@ -13,13 +13,13 @@ export class SummaryService {
   private currencyFacade = inject(CurrencyFacade);
   expenses: WritableSignal<Expense[]> = this.expenseFacade.expenses;
 
-  selectedCurrency = this.currencyFacade.selectedCurrency; // 🔥 Moneda seleccionada globalmente
-  convertedAmounts: WritableSignal<{ [id: string]: number }> = signal({}); // 🔥 Cache de conversiones
+  selectedCurrency = this.currencyFacade.selectedCurrency; //  Moneda seleccionada globalmente
+  convertedAmounts: WritableSignal<{ [id: string]: number }> = signal({}); //  Cache de conversiones
 
   constructor() {
     effect(() => {
-      console.log('📌 Moneda seleccionada555:', this.selectedCurrency());
-      this.convertAllExpenses(); // 🔥 Se ejecuta cuando cambia la moneda seleccionada
+     this.selectedCurrency();
+      this.convertAllExpenses(); //  Se ejecuta cuando cambia la moneda seleccionada
     });
   }
 
@@ -53,16 +53,10 @@ export class SummaryService {
 
 
   /**
-   * 🔥 Convierte todos los gastos a la moneda seleccionada
+   *  Convierte todos los gastos a la moneda seleccionada
    */
   async convertAllExpenses() {
-    console.log('📌 Convirtiendo gastos a:', this.selectedCurrency()); // 🔥 Depuración
     const expenses = this.expenses();
-    if (expenses.length === 0) {
-      console.warn('🚨 No hay gastos para convertir');
-      return;
-    }
-
     const conversions: { [id: string]: number } = {};
 
     for (let expense of expenses) {
@@ -72,20 +66,18 @@ export class SummaryService {
         this.selectedCurrency()
       );
     }
-
     this.convertedAmounts.set(conversions);
-    console.log('✅ Gastos convertidos:', this.convertedAmounts());
   }
 
   /**
-   * 🔥 Obtiene el monto convertido en la moneda seleccionada
+   *  Obtiene el monto convertido en la moneda seleccionada
    */
   getConvertedAmount(expense: Expense): number {
     return this.convertedAmounts()[expense.id!] ?? expense.amount;
   }
 
   /**
-   * 🔥 Obtiene los gastos del mes actual
+   *  Obtiene los gastos del mes actual
    */
   private getCurrentMonthExpenses(): Expense[] {
     const currentMonth = new Date().getMonth();

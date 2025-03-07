@@ -44,7 +44,7 @@ export class AuthService {
       const provider = new GoogleAuthProvider();
       const userCredential = await signInWithPopup(this.auth, provider);
       this.saveUserToSession(userCredential.user);
-      this.router.navigate(['/gastos']); // 🔥 Redirigir después del login
+      this.router.navigate(['/gastos']);
     } catch (error) {
       console.error('Error en el login:', error);
     }
@@ -54,7 +54,7 @@ export class AuthService {
     try {
       await signOut(this.auth);
       this.clearSession();
-      this.router.navigate(['/login']); // 🔥 Redirigir al login
+      this.router.navigate(['/login']);
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
     }

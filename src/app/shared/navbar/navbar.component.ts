@@ -13,10 +13,9 @@ export class NavbarComponent implements OnInit{
 
   private authService = inject(AuthService);
   userLogged!: User | null
-  ngOnInit(): void {
-    console.log(this.authService.getUser(), 'veo que trae el usuario');
-    this.getUser()
 
+  ngOnInit(): void {
+    this.getUser()
   }
 
   getUser(): void{

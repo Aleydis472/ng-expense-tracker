@@ -7,13 +7,12 @@ import { CurrencyService } from '../services/currency.service';
 export class CurrencyFacade {
   private currencyService = inject(CurrencyService);
 
-  selectedCurrency: WritableSignal<string> = signal('COP'); // 🔥 Moneda seleccionada globalmente
+  selectedCurrency: WritableSignal<string> = signal('COP');
 
   /**
    * Permite cambiar la moneda globalmente
    */
   setSelectedCurrency(currency: string) {
-    console.log('📌 Moneda cambiando en CurrencyFacade:', currency)
     this.selectedCurrency.set(currency);
   }
 
@@ -28,8 +27,6 @@ export class CurrencyFacade {
    * Convierte un monto usando tasas de cambio en caché
    */
   convertToUserCurrency(amount: number, fromCurrency: string, toCurrency: string): number {
-    console.log(amount, fromCurrency, toCurrency);
-
     return this.currencyService.convert(amount, fromCurrency, toCurrency);
   }
 }

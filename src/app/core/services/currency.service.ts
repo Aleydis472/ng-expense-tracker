@@ -7,16 +7,16 @@ import { firstValueFrom } from 'rxjs';
 })
 export class CurrencyService {
   private http = inject(HttpClient);
-  exchangeRates: WritableSignal<{ [key: string]: number }> = signal({}); // 🔥 Guardamos las tasas en caché
+  exchangeRates: WritableSignal<{ [key: string]: number }> = signal({}); //  Guardamos las tasas en caché
   private lastUpdated: number | null = null;
 
   constructor() {
-    this.loadExchangeRates(); // 🔥 Carga inicial
+    this.loadExchangeRates(); // Carga inicial
   }
 
   async loadExchangeRates() {
     const now = Date.now();
-    if (this.lastUpdated && now - this.lastUpdated < 3600000) return; // 🔥 Solo actualiza si han pasado más de 1 hora
+    if (this.lastUpdated && now - this.lastUpdated < 3600000) return; //Solo actualiza si han pasado más de 1 hora
 
     const response = await firstValueFrom(this.http.get<any>('https://api.exchangerate-api.com/v4/latest/USD'));
     this.exchangeRates.set(response.rates);
@@ -24,7 +24,7 @@ export class CurrencyService {
   }
 
   convert(amount: number, from: string, to: string): number {
-    if (!this.exchangeRates()[from] || !this.exchangeRates()[to]) return amount; // 🔥 Si no hay datos, retorna el monto original
+    if (!this.exchangeRates()[from] || !this.exchangeRates()[to]) return amount; // Si no hay datos, retorna el monto original
     return (amount / this.exchangeRates()[from]) * this.exchangeRates()[to];
   }
 }

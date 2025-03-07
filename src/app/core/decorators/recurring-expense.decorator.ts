@@ -8,7 +8,7 @@ export class RecurringExpenseDecorator implements Expense {
   }
 
   get description(): string {
-    return this.baseExpense.description; // 🔥 NO modificamos la descripción
+    return this.baseExpense.description;
   }
 
   get amount(): number {
@@ -28,7 +28,7 @@ export class RecurringExpenseDecorator implements Expense {
   }
 
   get recurrence(): string {
-    return this.recurrency; // 🔥 Ahora el Decorator agrega la recurrencia sin modificar el objeto original
+    return this.recurrency; //  Ahora el Decorator agrega la recurrencia sin modificar el objeto original
   }
 
 
@@ -39,11 +39,11 @@ export class RecurringExpenseDecorator implements Expense {
       currency: this.baseExpense.currency,
       category: this.baseExpense.category,
       date: this.baseExpense.date,
-      recurrence: this.recurrence // 🔥 Se añade la recurrencia al objeto
+      recurrence: this.recurrence //  Se añade la recurrencia al objeto
     };
 
     if (this.baseExpense.id) {
-      expenseData.id = this.baseExpense.id; // 🔥 Solo se agrega si `id` tiene un valor
+      expenseData.id = this.baseExpense.id; //  Solo se agrega si `id` tiene un valor
     }
 
     return expenseData;

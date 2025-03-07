@@ -15,10 +15,10 @@ export default class SummaryComponent {
   private summaryService = inject(SummaryService);
   spinner = inject(NgxSpinnerService);
 
-  totalMonthlyExpense: Signal<number> = this.summaryService.totalMonthlyExpense; // 🔥 Ahora es `Signal`
-  categoryTotals: Signal<{ [category: string]: number }> = this.summaryService.categoryTotals; // 🔥 También `Signal`
-  chartData: Signal<ChartData<'pie', number[], string>> = this.summaryService.chartData; // 🔥 `Signal`, no `WritableSignal`
-  isLoading = computed(() => this.summaryService.expenses().length === 0); // 🔥 Detecta si hay datos
+  totalMonthlyExpense: Signal<number> = this.summaryService.totalMonthlyExpense;
+  categoryTotals: Signal<{ [category: string]: number }> = this.summaryService.categoryTotals;
+  chartData: Signal<ChartData<'pie', number[], string>> = this.summaryService.chartData;
+  isLoading = computed(() => this.summaryService.expenses().length === 0);
   selectedCurrency = this.summaryService.selectedCurrency;
 
 
