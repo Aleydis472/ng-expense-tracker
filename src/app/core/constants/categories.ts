@@ -1,7 +1,7 @@
 export const CATEGORIES = [
   { name: 'Alimentación', color: '#ff6384b0' },
   { name: 'Transporte', color: '#36A2EB' },
-  { name: 'Entretenimiento', color: '#FFCE56' },
+  { name: 'Entretenimiento', color: '#ffce56bf' },
   { name: 'Salud', color: '#4caf50a1' },
   { name: 'Educación', color: '#9c27b06b' }
 ];
