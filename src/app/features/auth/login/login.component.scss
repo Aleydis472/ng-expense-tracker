@@ -1,0 +1,35 @@
+.card-main {
+  max-width: 90%;
+  margin: auto;
+  background-color: #ffffff;
+  min-height: 80vh;
+  width: 100%;
+  padding: 20px;
+  margin-top: 4rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  .card-login {
+    padding: 60px;
+    background-color: #0d6efd0f;
+    min-height: 55vh;
+    max-width: 70vh;
+  }
+
+  .btn-login {
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    width: 90%;
+  }
+
+  .btn-login:hover {
+    color: #ffffff;
+    background-color: blue;
+  }
+}
+
+.card {
+  border: none;
+  border-radius: 2.5rem;
+}

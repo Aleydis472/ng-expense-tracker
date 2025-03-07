@@ -1,0 +1,56 @@
+<div class="modal " id="expenseModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Registrar gasto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="expenseForm">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Descripción</label>
+              <input class="form-control" formControlName="description" required />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Monto</label>
+              <input class="form-control" type="number" formControlName="amount" required />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Moneda</label>
+              <select class="form-select" formControlName="currency">
+                <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Categoría</label>
+              <select class="form-select" formControlName="category">
+                <option selected>Seleccione una categoría</option>
+                <option *ngFor="let category of categorieList" [value]="category.name">
+                  {{ category.name }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Fecha</label>
+              <input type="date" class="form-control" formControlName="date">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">¿Es un gasto recurrente?</label>
+              <select class="form-select" formControlName="recurrence">
+                <option value="">No recurrente</option>
+                <option *ngFor="let option of recurrenceOptionList" [value]="option.value">
+                  {{ option.label }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="addExpense()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

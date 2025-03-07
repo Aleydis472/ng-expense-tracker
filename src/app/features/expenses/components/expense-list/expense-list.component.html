@@ -1,0 +1,54 @@
+
+<div class="row">
+  <div class="col-md-7 d-flex">
+    <h3>Registro de gastos</h3>
+    <div>
+      <button class="btn btn-add mx-2" (click)="openAddExpenseModal()"><i class="fa-solid fa-plus"></i></button>
+    </div>
+
+  </div>
+  <div class="col-md-5">
+    <div class="mb-3">
+      <select class="form-select" [(ngModel)]="selectedCategory">
+        <option value="">Todas las categorías</option>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+
+      <select class="form-select mt-2" id="currencySelect" (change)="changeCurrency($event)">
+        <option *ngFor="let currency of currencies" [value]="currency" [selected]="currency === selectedCurrency()">
+          {{ currency }}
+        </option>
+      </select>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="card card-expense mt-2" *ngFor="let expense of getFilteredExpenses()">
+  <div class="card-body ">
+    <div class="row">
+      <div class="col-md-6">
+        <h5>
+          {{ expense.description | titlecase }}
+        </h5>
+        <span class="badge" [ngStyle]="{'background-color': getCategoryColor(expense.category)}">
+          {{ expense.category }}
+        </span>
+      </div>
+      <div class="col-md-6">
+        <div class="d-flex justify-content-end">
+          <div>
+            <h5>{{ convertAmount(expense) | currency:selectedCurrency() }} ({{ expense.recurrence
+              ? expense.recurrence : '-' }})</h5>
+            <span class="text-small-expense">{{ expense.date | date:'yyy/MM/dd' }}</span>
+          </div>
+          <div class="ms-4 d-flex justify-content-center align-items-center">
+            <button class="btn btn-close p-3" (click)="deleteExpense(expense.id)"><i
+                class="fa-solid fa-xmark"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

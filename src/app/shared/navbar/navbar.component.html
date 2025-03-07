@@ -1,0 +1,85 @@
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+  <div class="container">
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <button class="btn btn-danger ms-3" (click)="logout()">🚪 Cerrar sesión</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>  -->
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <ng-container *ngIf="userLogged ">
+            <img [src]="userLogged.photoURL" class="profile-pic" alt="Foto de perfil">
+          </ng-container>
+          <span class="text-name">{{userLogged?.displayName}}</span>
+        </li>
+      </ul>
+      <span class="navbar-text">
+        <button class="btn btn-session fw-bold px-5" (click)="logout()">Cerrar sesión</button>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<!-- <button class="btn btn-sm btn-sidebar-toggle d-md-none d-block" (click)="toggleSidebar()">
+  <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
+</button>
+<div class="d-flex justify-content-center align-items-center text-dark min-vh-100">
+
+  Logo
+  <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto px-3 text-dark text-decoration-none">
+    <span class="fs-5 d-none d-sm-inline">FinTrack</span>
+  </a>
+
+ Menú de navegación
+  <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100" id="menu">
+    <li class="nav-item w-100">
+      <a [routerLink]="['/gastos']" routerLinkActive="active" class="nav-link px-3 align-middle">
+        <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Gastos</span>
+      </a>
+    </li>
+    <li class="nav-item w-100">
+      <a [routerLink]="['/resumen']" routerLinkActive="active" class="nav-link px-3 align-middle">
+        <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Resumen-mensual</span>
+      </a>
+    </li>
+
+    <li class="nav-item w-100">
+      <a [routerLink]="['/reports']" routerLinkActive="active" class="nav-link px-3 align-middle">
+        <i class="fs-4 bi-bar-chart"></i> <span class="ms-1 d-none d-sm-inline">Informes</span>
+      </a>
+    </li>
+  </ul> -->
+
+<!-- Perfil de usuario (opcional)
+  <hr>
+  <div class="dropdown pb-4 px-3">
+    <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+      <span class="d-none d-sm-inline mx-1">Usuario</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+      <li><a class="dropdown-item" href="#">Configuración</a></li>
+      <li><a class="dropdown-item" href="#">Perfil</a></li>
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+      <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+    </ul>
+  </div>-->
