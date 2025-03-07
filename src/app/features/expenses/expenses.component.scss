@@ -1,4 +1,4 @@
-.card-expense{
+.card-expense {
   max-width: 95%;
   margin: auto;
   background-color: white;
@@ -9,3 +9,12 @@
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+
+
+/* @media (max-width: 576px) {
+  .card-expense {
+    max-width: 100%;
+    padding: 10px;
+  }
+} */

@@ -1,13 +1,9 @@
 <div class="container">
 
 
-  <div class="d-flex justify-content-between">
-    <h3>Resumen de Gastos del Mes</h3>
-
-    <div class="alert alert-primary">
-      <strong>Total gastado:</strong> {{ totalMonthlyExpense() | currency:selectedCurrency() }}
-    </div>
-
+  <h3>Resumen del Mes</h3>
+  <div class="alert alert-primary mb-4 mt-4">
+    <strong>Total gastado:</strong> {{ totalMonthlyExpense() | currency:selectedCurrency() }}
   </div>
 
 
@@ -15,7 +11,7 @@
     No hay datos suficientes para generar la gráfica.
   </div>
 
-  <div class="chart-container" *ngIf="chartData().datasets[0].data.length > 0">
+  <div class="chart-container mt-3" *ngIf="chartData().datasets[0].data.length > 0">
     <canvas baseChart [data]="chartData()" [type]="'pie'"></canvas>
   </div>
 </div>

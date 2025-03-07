@@ -1,4 +1,3 @@
-
 <div class="row">
   <div class="col-md-7 mb-3 d-flex">
     <h3>Registro de gastos</h3>
@@ -25,30 +24,56 @@
 </div>
 
 
-<div class="card card-expense mt-2" *ngFor="let expense of getFilteredExpenses()">
-  <div class="card-body ">
+<!-- <div class="card card-expense mt-2" *ngFor="let expense of getFilteredExpenses()">
+  <div class="card-body  ">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-10 ">
         <h5>
-          {{ expense.description | titlecase }}
+          {{ expense.description | titlecase }} | <span class="badge"
+            [ngStyle]="{'background-color': getCategoryColor(expense.category)}">
+            {{ expense.category }}
+          </span> <span class="fst-italic fw-normal">{{ expense.recurrence? ' - ' : ''}}
+            {{expense.recurrence
+            ? expense.recurrence: ''}}</span>
         </h5>
-        <span class="badge" [ngStyle]="{'background-color': getCategoryColor(expense.category)}">
-          {{ expense.category }}
-        </span>
+        {{ convertAmount(expense) | currency:selectedCurrency() }} - <span class="fst-italic fw-normal"> {{ expense.date
+          | date:'yyy/MM/dd'}}</span>
       </div>
-      <div class="col-md-6">
-        <div class="d-flex justify-content-end">
-          <div>
-            <h5>{{ convertAmount(expense) | currency:selectedCurrency() }} ({{ expense.recurrence
-              ? expense.recurrence : '-' }})</h5>
-            <span class="text-small-expense">{{ expense.date | date:'yyy/MM/dd' }}</span>
-          </div>
-          <div class="ms-4 d-flex justify-content-center align-items-center">
-            <button class="btn btn-close p-3" (click)="deleteExpense(expense.id)"><i
-                class="fa-solid fa-xmark"></i></button>
-          </div>
+      <div class="col-md-2">
+        <div class=" ">
+          <button class="btn btn-close p-3 " (click)="deleteExpense(expense.id)"><i
+              class="fa-solid fa-xmark"></i></button>
         </div>
       </div>
     </div>
   </div>
+</div>  -->
+
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Descripción</th>
+        <th>Precio ({{selectedCurrency()}} ) </th>
+        <th>Categoria</th>
+        <th>Reccurrencia</th>
+        <th>Fecha</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let expense of getFilteredExpenses()">
+        <td>{{ expense.description }}</td>
+        <td>{{ convertAmount(expense) | currency:selectedCurrency() }}</td>
+        <td><span class="badge" [ngStyle]="{'background-color': getCategoryColor(expense.category)}">
+            {{ expense.category }}
+          </span></td>
+        <td>{{expense.recurrence ? expense.recurrence: '-'}}</td>
+        <td>{{ expense.date | date:'yyy/MM/dd'}}</td>
+        <td class="text-center" ><button class="btn btn-close p-2 text-dark" (click)="deleteExpense(expense.id)"><i
+              class="fa-solid fa-xmark "></i></button></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

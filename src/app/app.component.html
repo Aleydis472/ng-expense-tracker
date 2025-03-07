@@ -1,29 +1,10 @@
 @if (isAuthenticated()) {
-
 <app-navbar></app-navbar>
 }
 
-
-<section class="p-3">
+<section class="p-md-4 mt-2 px-md-5">
   <ngx-spinner type="ball-circus">
     <p class="fs-5 text-light">Cargando...</p>
   </ngx-spinner>
   <router-outlet />
 </section>
-
-
-<!-- <div class="container-fluid">
-  <div class="row flex-nowrap">
-    <!-- Sidebar
-    <div class="col-auto col-md-3 col-xl-2 px-0 bg-sidebar">
-      <app-navbar *ngIf="isAuthenticated()"></app-navbar>
-    </div>
-
-    <!-- Contenido principal
-    <div class="col py-3 d-flex justify-content-center align-items-center">
-      <div class="card-container">
-        <router-outlet></router-outlet>
-      </div>
-    </div>
-  </div>
-</div> -->

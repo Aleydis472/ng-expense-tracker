@@ -13,7 +13,7 @@ import { CurrencyService } from '../../../../core/services/currency.service';
 declare const $: any;
 @Component({
   selector: 'app-expense-list',
-  imports: [CommonModule, CurrencyPipe, DatePipe, FormsModule, TitleCasePipe],
+  imports: [CommonModule, DatePipe, FormsModule, CurrencyPipe],
   templateUrl: './expense-list.component.html',
   styleUrl: './expense-list.component.scss'
 })
