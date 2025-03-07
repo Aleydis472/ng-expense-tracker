@@ -1,4 +1,5 @@
 export const environment = {
+  production: true,
   firebaseConfig: {
     apiKey: "AIzaSyDPvxXQx2f5BNUsp26LgGIi293M3bup8gM",
     authDomain: "expense-tracker-b40f5.firebaseapp.com",
