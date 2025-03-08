@@ -9,11 +9,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Alerts } from '../../../../core/utils/alerts';
 import { CURRENCIES } from '../../../../core/constants/currencies';
 import { CurrencyService } from '../../../../core/services/currency.service';
+import { PaginatorComponent } from '../../../../shared/paginator/paginator.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 declare const $: any;
 @Component({
   selector: 'app-expense-list',
-  imports: [CommonModule, DatePipe, FormsModule, CurrencyPipe],
+  imports: [CommonModule, DatePipe, FormsModule, CurrencyPipe, PaginatorComponent, NgxPaginationModule],
   templateUrl: './expense-list.component.html',
   styleUrl: './expense-list.component.scss'
 })
@@ -22,7 +24,7 @@ export class ExpenseListComponent {
   private expenseFacade = inject(ExpenseFacade);
   private currencyFacade = inject(CurrencyFacade);
   private currencyService = inject(CurrencyService);
-  spinner = inject(NgxSpinnerService);
+  private spinner = inject(NgxSpinnerService);
 
   expenses: WritableSignal<Expense[]> = this.expenseFacade.expenses; //  Signal proveniente de ExpenseFacade
   categories = CATEGORIES.map(c => c.name);
@@ -30,6 +32,8 @@ export class ExpenseListComponent {
   selectedCurrency = signal('COP'); //  Moneda seleccionada globalmente
   currencies = CURRENCIES;
   exchangeRates: WritableSignal<{ [key: string]: number }> = this.currencyService.exchangeRates; //  Tasas en caché
+  currentPage!: number;
+  itemPerPages = 5;
 
   constructor() {
     effect(() => {
