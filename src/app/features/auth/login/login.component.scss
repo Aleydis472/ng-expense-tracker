@@ -33,9 +33,7 @@
 }
 
 @media (max-width: 576px) {
-  :host {
-    overflow: hidden;
-  }
+
   .card-main {
     position: absolute;
     bottom: 0;
@@ -62,14 +60,12 @@
       color: white !important;
     }
   }
-
-
 }
 
-@media (min-width: 578px) and (max-width: 1199.98px){
-    .card-main{
-      max-width: 80%;
-      min-height: 60vh;
-      margin-top: 7rem;
-    }
- }
+@media (min-width: 578px) and (max-width: 1199.98px) {
+  .card-main {
+    max-width: 80%;
+    min-height: 60vh;
+    margin-top: 7rem;
+  }
+}

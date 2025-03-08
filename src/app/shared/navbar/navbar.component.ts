@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { User } from '@angular/fire/auth';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +13,8 @@ import { User } from '@angular/fire/auth';
 export class NavbarComponent implements OnInit{
 
   private authService = inject(AuthService);
+  spinner = inject(NgxSpinnerService);
+
   userLogged!: User | null
 
   ngOnInit(): void {
@@ -23,7 +26,9 @@ export class NavbarComponent implements OnInit{
   }
 
   logout() {
+    this.spinner.show();
     this.authService.logout();
+    this.spinner.hide();
   }
 
 
