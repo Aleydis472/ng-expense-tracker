@@ -33,7 +33,7 @@ export class ExpenseListComponent {
   currencies = CURRENCIES;
   exchangeRates: WritableSignal<{ [key: string]: number }> = this.currencyService.exchangeRates; //  Tasas en caché
   currentPage!: number;
-  itemPerPages = 5;
+  itemPerPages = 9;
 
   constructor() {
     effect(() => {

@@ -25,13 +25,14 @@ export class ExpenseModalComponent implements OnInit {
   categorieList = CATEGORIES;
   userCurrency = 'COP';
   currencies = CURRENCIES; // Monedas disponibles
+  dateActually = new Date().toISOString().split('T')[0];
 
   ngOnInit() {
     this.expenseForm = this.fb.group({
       description: ['', Validators.required],
       amount: [0, [Validators.required, Validators.min(1)]],
       category: ['', Validators.required],
-      date: [new Date().toISOString().split('T')[0], Validators.required],
+      date: [this.dateActually, Validators.required],
       currency: ['COP', Validators.required],
       recurrence: [''],
     });
@@ -48,8 +49,7 @@ export class ExpenseModalComponent implements OnInit {
       this.expenseFacade.addExpense(expense);
       this.resetForm();
       this.spinner.hide();
-      Alerts.show({ title: 'Gasto creado', html: 'Se guardó la reserva correctamente.', icon: 'success' });
-
+      Alerts.show({ title: 'Gasto creado', html: 'Se guardó el registro correctamente.', icon: 'success' });
       $('#expenseModal').modal('hide');
     } else {
       Alerts.show({ title: 'ERROR', html: 'Campos obligatorios.', icon: 'error' })
@@ -59,7 +59,6 @@ export class ExpenseModalComponent implements OnInit {
 
   private resetForm() {
     this.expenseForm.reset();
-    this.expenseForm.patchValue({ currency: 'COP', recurrence: '' }); // Restablecer valores por defecto
-
+    this.expenseForm.patchValue({ currency: 'COP', recurrence: '' , category: '', date: this.dateActually}); // Restablecer valores por defecto
   }
 }
