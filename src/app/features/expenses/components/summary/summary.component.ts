@@ -13,7 +13,7 @@ import { ChartData } from 'chart.js';
 })
 export default class SummaryComponent {
   private summaryService = inject(SummaryService);
-  spinner = inject(NgxSpinnerService);
+  private spinner = inject(NgxSpinnerService);
 
   totalMonthlyExpense: Signal<number> = this.summaryService.totalMonthlyExpense;
   categoryTotals: Signal<{ [category: string]: number }> = this.summaryService.categoryTotals;
