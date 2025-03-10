@@ -7,6 +7,10 @@ export class RecurringExpenseDecorator implements Expense {
     return this.baseExpense.id;
   }
 
+  get uid(): string {
+    return this.baseExpense.uid;
+  }
+
   get description(): string {
     return this.baseExpense.description;
   }
@@ -33,7 +37,8 @@ export class RecurringExpenseDecorator implements Expense {
 
 
   toPlainObject(): Expense {
-    const expenseData: any = {
+    const expenseData: Expense = {
+      uid: this.baseExpense.uid,
       description: this.baseExpense.description,
       amount: this.baseExpense.amount,
       currency: this.baseExpense.currency,

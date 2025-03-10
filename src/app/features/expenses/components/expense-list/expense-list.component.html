@@ -23,6 +23,8 @@
   </div>
 </div>
 
+@if (getFilteredExpenses().length > 0) {
+
 <div class="table-responsive">
   <table class="table">
     <thead>
@@ -37,7 +39,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let expense of getFilteredExpenses() | paginate
-              : { itemsPerPage: itemPerPages, currentPage: currentPage }">
+                : { itemsPerPage: itemPerPages, currentPage: currentPage }">
         <td>{{ expense.description }}</td>
         <td>{{ convertAmount(expense) | currency:selectedCurrency() }}</td>
         <td><span class="badge" [ngStyle]="{'background-color': getCategoryColor(expense.category)}">
@@ -45,12 +47,17 @@
           </span></td>
         <td>{{expense.recurrence ? expense.recurrence: '-'}}</td>
         <td>{{ expense.date | date:'yyy/MM/dd'}}</td>
-        <td class="text-center" ><button class="btn btn-close p-2 text-dark" (click)="deleteExpense(expense.id)"><i
+        <td class="text-center"><button class="btn btn-close p-2 text-dark" (click)="deleteExpense(expense.id)"><i
               class="fa-solid fa-xmark "></i></button></td>
       </tr>
     </tbody>
   </table>
   <div class="paginator mt-3 text-center">
-    <app-paginator (pageChange)="currentPage = $event" (pageBoundsCorrection)="currentPage = $event" ></app-paginator>
+    <app-paginator (pageChange)="currentPage = $event" (pageBoundsCorrection)="currentPage = $event"></app-paginator>
   </div>
 </div>
+}@else {
+<div class="alert alert-warning">
+  No hay registros de gastos
+</div>
+}

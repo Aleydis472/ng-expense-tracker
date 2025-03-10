@@ -12,7 +12,6 @@ export class SummaryService {
   private expenseFacade = inject(ExpenseFacade);
   private currencyFacade = inject(CurrencyFacade);
   expenses: WritableSignal<Expense[]> = this.expenseFacade.expenses;
-
   selectedCurrency = this.currencyFacade.selectedCurrency; //  Moneda seleccionada globalmente
   convertedAmounts: WritableSignal<{ [id: string]: number }> = signal({}); //  Cache de conversiones
 

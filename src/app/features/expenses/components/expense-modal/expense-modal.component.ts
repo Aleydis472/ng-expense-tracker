@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { RecurringExpenseDecorator } from '../../../../core/decorators/recurring-expense.decorator';
 import { CATEGORIES } from '../../../../core/constants/categories';
 import { RECURRENCE_TYPES } from '../../../../core/constants/recurrence-options';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Alerts } from '../../../../core/utils/alerts';
 import { CURRENCIES } from '../../../../core/constants/currencies';
 declare const $: any;
@@ -18,7 +17,6 @@ declare const $: any;
 })
 export class ExpenseModalComponent implements OnInit {
   private expenseFacade = inject(ExpenseFacade);
-  private spinner = inject(NgxSpinnerService);
   private fb = inject(FormBuilder);
   expenseForm!: FormGroup;
   recurrenceOptionList = RECURRENCE_TYPES;
@@ -39,7 +37,6 @@ export class ExpenseModalComponent implements OnInit {
   }
 
   async addExpense() {
-    this.spinner.show();
     if (this.expenseForm.valid) {
       let expense = this.expenseForm.value;
       if (expense.recurrence) {
@@ -48,12 +45,10 @@ export class ExpenseModalComponent implements OnInit {
       }
       this.expenseFacade.addExpense(expense);
       this.resetForm();
-      this.spinner.hide();
       Alerts.show({ title: 'Gasto creado', html: 'Se guardó el registro correctamente.', icon: 'success' });
       $('#expenseModal').modal('hide');
     } else {
       Alerts.show({ title: 'ERROR', html: 'Campos obligatorios.', icon: 'error' })
-      this.spinner.hide();
     }
   }
 

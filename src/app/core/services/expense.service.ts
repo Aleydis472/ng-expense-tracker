@@ -1,14 +1,16 @@
-import { Injectable, inject, WritableSignal, signal } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
+import { inject, Injectable, Signal } from '@angular/core';
+import { Firestore, collection, query, where, collectionData, addDoc, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
+import { signal, WritableSignal } from '@angular/core';
+import { AuthService } from './auth.service';
 import { Expense } from '../models/expense.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ExpenseService {
   private firestore = inject(Firestore);
-  private expensesCollection = collection(this.firestore, 'expenses');
-
+  private authService = inject(AuthService);
+  isLoading = signal<boolean>(true); // Agregamos un estado de carga
   expenses: WritableSignal<Expense[]> = signal<Expense[]>([]);
 
   constructor() {
@@ -16,14 +18,34 @@ export class ExpenseService {
   }
 
   private loadExpenses() {
-    collectionData(this.expensesCollection, { idField: 'id' }).subscribe({
-      next: (data) => this.expenses.set(data as Expense[]),
-      error: (err) => console.error('Error al cargar gastos:', err),
+    this.isLoading.set(true); // Inicia la carga
+    const user = this.authService.getUser();
+    if (!user) return; // Si no hay usuario autenticado, no carga gastos
+
+    const userExpensesQuery = query(
+      collection(this.firestore, 'expenses'),
+      where('uid', '==', user.uid) // Filtramos por usuario autenticado
+    );
+
+    collectionData(userExpensesQuery, { idField: 'id' }).subscribe({
+      next: (data) => {
+        this.expenses.set(data as Expense[]),
+          this.isLoading.set(false);
+      },
+      error: (err) => {
+        console.error('Error al cargar gastos:', err);
+        this.isLoading.set(false); // Asegurar que se oculta el loading en caso de error
+      }
+
     });
   }
 
   async addExpense(expense: Expense) {
-    const docRef = await addDoc(this.expensesCollection, expense);
+    const user = this.authService.getUser();
+    if (!user) return;
+
+    const newExpense = { ...expense, uid: user.uid }; // Agregamos el uid del usuario
+    const docRef = await addDoc(collection(this.firestore, 'expenses'), newExpense);
     await updateDoc(doc(this.firestore, `expenses/${docRef.id}`), { id: docRef.id });
   }
 
@@ -35,5 +57,9 @@ export class ExpenseService {
   async deleteExpense(id: string) {
     const expenseDoc = doc(this.firestore, `expenses/${id}`);
     await deleteDoc(expenseDoc);
+  }
+
+  get loading(): Signal<boolean> {
+    return this.isLoading;
   }
 }

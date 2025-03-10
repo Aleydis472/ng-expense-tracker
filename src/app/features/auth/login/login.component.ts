@@ -12,7 +12,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export default class LoginComponent implements OnInit {
   private authService = inject(AuthService);
   private router = inject(Router);
-  spinner = inject(NgxSpinnerService);
 
   ngOnInit() {
     if (this.authService.isAuthenticated()) {
@@ -21,12 +20,10 @@ export default class LoginComponent implements OnInit {
   }
 
   async login() {
-    this.spinner.show();
     try {
       await this.authService.loginWithGoogle();
     } catch (error) {
       console.error('Error en el login:', error);
     }
-    this.spinner.hide();
   }
 }

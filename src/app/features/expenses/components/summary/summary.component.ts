@@ -4,6 +4,7 @@ import { BaseChartDirective } from 'ng2-charts';
 import { SummaryService } from '../../../../core/services/summary.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ChartData } from 'chart.js';
+import { ExpenseService } from '../../../../core/services/expense.service';
 
 @Component({
   selector: 'app-summary',
@@ -13,12 +14,12 @@ import { ChartData } from 'chart.js';
 })
 export default class SummaryComponent {
   private summaryService = inject(SummaryService);
+  private expenseService = inject(ExpenseService);
   private spinner = inject(NgxSpinnerService);
 
   totalMonthlyExpense: Signal<number> = this.summaryService.totalMonthlyExpense;
-  categoryTotals: Signal<{ [category: string]: number }> = this.summaryService.categoryTotals;
   chartData: Signal<ChartData<'pie', number[], string>> = this.summaryService.chartData;
-  isLoading = computed(() => this.summaryService.expenses().length === 0);
+  isLoading = computed(() => this.expenseService.loading());
   selectedCurrency = this.summaryService.selectedCurrency;
 
 

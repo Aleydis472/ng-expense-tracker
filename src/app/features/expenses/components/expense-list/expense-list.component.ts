@@ -1,11 +1,10 @@
 import { Component, effect, inject, signal, WritableSignal } from '@angular/core';
 import { ExpenseFacade } from '../../../../core/facades/expense.facade';
-import { CommonModule, CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { CATEGORIES, CATEGORY_COLORS } from '../../../../core/constants/categories';
 import { CurrencyFacade } from '../../../../core/facades/currency.facade';
 import { Expense } from '../../../../core/models/expense.model';
 import { FormsModule } from '@angular/forms';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Alerts } from '../../../../core/utils/alerts';
 import { CURRENCIES } from '../../../../core/constants/currencies';
 import { CurrencyService } from '../../../../core/services/currency.service';
@@ -24,7 +23,6 @@ export class ExpenseListComponent {
   private expenseFacade = inject(ExpenseFacade);
   private currencyFacade = inject(CurrencyFacade);
   private currencyService = inject(CurrencyService);
-  private spinner = inject(NgxSpinnerService);
 
   expenses: WritableSignal<Expense[]> = this.expenseFacade.expenses; //  Signal proveniente de ExpenseFacade
   categories = CATEGORIES.map(c => c.name);
@@ -81,11 +79,9 @@ export class ExpenseListComponent {
       cancelButtonText: 'No, cancelar'
     }).then(async (result) => {
       if (result.isConfirmed) {
-        this.spinner.show();
         if (id) {
           await this.expenseFacade.deleteExpense(id);
         }
-        this.spinner.hide();
         Alerts.show({
           title: '¡Confirmado!',
           html: 'Has eliminado el registro.',
